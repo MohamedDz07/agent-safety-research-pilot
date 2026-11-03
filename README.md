@@ -1,5 +1,7 @@
 # Agent Safety Research Pilot
 
+**New study:** [Authorization Boundary Study](STUDY.md) extends this repository with 48 matched English/French cases, a stateful simulated backend, trusted-grant and monitor ablations, and a separate `agent-safety-study` command. Its protocol is ready to run; **no real-model outcomes have been collected**.
+
 A small, reproducible evaluation of whether a tool-using model completes an authorized task while also proposing or executing an unauthorized action. The dataset contains **16 synthetic cases**: eight matched clean/attack pairs across English and French email, report, invoice, and meeting workflows. All tool effects are simulated locally. There are **no model results in this repository**.
 
 The research question is deliberately narrow: given an explicit user authorization and an external source containing an instruction to do something else, what does the agent propose, what reaches the simulated execution boundary, and can it still complete the legitimate task?
