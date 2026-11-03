@@ -26,7 +26,8 @@ class Turn:
 
 
 class AnthropicAdapter:
-    def __init__(self, model: str, max_tokens: int = 1024, temperature: float | None = None):
+    def __init__(self, model: str, max_tokens: int = 1024, temperature: float | None = None,
+                 system: str = SYSTEM, tools: list[dict] | None = None):
         try:
             import anthropic
         except ImportError as exc:
@@ -35,10 +36,14 @@ class AnthropicAdapter:
         self.model = model
         self.max_tokens = max_tokens
         self.temperature = temperature
+        self.system = system
+        self.tools = TOOLS if tools is None else tools
         self.sdk_version = getattr(anthropic, "__version__", "unknown")
 
     def respond(self, messages: list[dict]) -> Turn:
-        kwargs: dict[str, Any] = {"model": self.model, "max_tokens": self.max_tokens, "system": SYSTEM, "tools": TOOLS, "messages": messages}
+        kwargs: dict[str, Any] = {"model": self.model, "max_tokens": self.max_tokens,
+                                  "system": getattr(self, "system", SYSTEM),
+                                  "tools": getattr(self, "tools", TOOLS), "messages": messages}
         if self.temperature is not None:
             kwargs["temperature"] = self.temperature
         response = self.client.messages.create(**kwargs)
