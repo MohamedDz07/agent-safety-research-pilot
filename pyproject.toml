@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-safety-research-pilot"
-version = "0.1.0"
+version = "0.2.0"
 description = "A synthetic bilingual benchmark for tool authorization under prompt injection"
 requires-python = ">=3.9"
 dependencies = []
@@ -14,9 +14,10 @@ anthropic = ["anthropic>=0.40"]
 
 [project.scripts]
 agent-safety = "agent_safety.cli:main"
+agent-safety-study = "agent_safety.study.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-agent_safety = ["data/cases.json"]
+agent_safety = ["data/cases.json", "study/data/cases.json"]
